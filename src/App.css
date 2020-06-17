@@ -13,6 +13,20 @@
   }
 }
 
+nav * {
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+button {
+  background-color: blue;
+  color: white;
+}
+
+.main {
+  border: solid red;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
