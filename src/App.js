@@ -24,36 +24,36 @@ class App extends React.Component {
 
   static contextType = PokemonContext;
 
-  handleSearch(event) {
-    this.setState({
-      currentPokemon: { name: event.target.value}
-    })
-    event.preventDefault()
-
-    console.log('currentPokemon: ', this.context.currentPokemon.name)
-    // fetch('https://pokeapi.co/api/v2/pokemon/' + event.tagert.value)
-    //   .then(response => response.json()) // turn the response into json
-    //   .then(json => {
-    //     let outputString = json.name + ': '
-    //     let pokeType = json.types;
-    //     pokeType.forEach(typeItem => {
-    //       //push the type to the array where the key is the name of the pokemon
-    //       typesObj[json.name].push(typeItem.type.name)
-    //     });
-    //     //console.log pokemon name : type, type, etc..
-    //     outputString += typesObj[json.name].join(', ');
-    //     console.log(outputString);
-    //   });
-
-
-  }
-
   handleChange(event) {
     this.setState({
       currentPokemon: {
         name: event.target.value
       }
     })
+  }
+
+  handleSearch(event) {
+
+    console.log('currentPokemon: ', this.state.currentPokemon.name)
+    fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentPokemon.name)
+      .then(response => response.json()) // turn the response into json
+      .then(json => {
+        let outputString = json.name + ': '
+        let pokeType = json.types;
+        pokeType.forEach(typeItem => {
+          //push the type to the array where the key is the name of the pokemon
+          typesObj[json.name].push(typeItem.type.name)
+        });
+        //console.log pokemon name : type, type, etc..
+        outputString += typesObj[json.name].join(', ');
+        console.log(outputString);
+      });
+
+    // this.setState({
+    //   currentPokemon: { name: event.target.value }
+    // })
+    event.preventDefault()
+
   }
 
   render() {
