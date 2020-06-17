@@ -1,7 +1,7 @@
 import React from 'react';
 
 const value = { 
-    currentPokemon: {},
+    currentPokemon: {name: 'Default'},
     groceryList: {},
 }
 

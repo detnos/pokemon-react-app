@@ -3,9 +3,7 @@ import './App.css';
 import { PokemonContext } from './PokemonContext';
 import PokemonSearch from './PokemonSearch';
 import NavBar from './NavBar';
-
-//declare variables for fetch process
-let typesObj = {};
+import Pokemon from './Pokemon'
 
 class App extends React.Component {
   constructor(props) {
@@ -71,9 +69,11 @@ class App extends React.Component {
         >
           <header className="">
             <NavBar handleClick={this.handleClick.bind(this)} />
+            <PokemonSearch />
           </header>
           <div className="main">
             <h1> This is the main body area</h1>
+            <Pokemon />
             {/* Main Body compoenents go here */}
             {this._renderSubComp()}
           </div>
