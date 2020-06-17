@@ -74,7 +74,6 @@ class App extends React.Component {
           </header>
           <div className="main">
             <h1> This is the main body area</h1>
-            <Pokemon />
             {/* Main Body compoenents go here */}
             <h1> This is the main body area</h1>
             {this._renderSubComp()}
@@ -97,7 +96,10 @@ class MyCollection extends React.Component {
 }
 class Search extends React.Component {
   render() {
-    return <div>Pokemon Component with search results will go here</div>;
+    return <div>
+        Pokemon Component with search results will go here
+        <Pokemon />
+      </div>;
   }
 }
 
