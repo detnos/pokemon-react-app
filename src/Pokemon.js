@@ -5,7 +5,7 @@ class Pokemon extends React.Component {
   static contextType = PokemonContext;
 
   render() {
-
+      
     return (
       <div className="Pokemon-display">
         <p>Pokemon Component</p>
