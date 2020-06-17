@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import { PokemonContext } from './PokemonContext';
 import NavBar from './NavBar';
-import Pokemon from './Pokemon'
-
+import Pokemon from './Pokemon';
 
 class App extends React.Component {
   constructor(props) {
@@ -53,9 +52,10 @@ class App extends React.Component {
         this.setState({
           currentPokemon: json || { name: this.state.currentSearch.name }
         });
-      });
+      })
+      .then(() => this.setState({ render: 'Search' }));
     event.preventDefault();
-    this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
+    // this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
     // this.handleClick('Search');
   }
 
@@ -96,10 +96,12 @@ class MyCollection extends React.Component {
 }
 class Search extends React.Component {
   render() {
-    return <div>
+    return (
+      <div>
         Pokemon Component with search results will go here
         <Pokemon />
-      </div>;
+      </div>
+    );
   }
 }
 
