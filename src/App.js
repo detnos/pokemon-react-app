@@ -4,9 +4,6 @@ import { PokemonContext } from './PokemonContext';
 import PokemonSearch from './PokemonSearch';
 import NavBar from './NavBar';
 
-//declare variables for fetch process
-let typesObj = {};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -48,15 +45,15 @@ class App extends React.Component {
   }
 
   handleSearch(event) {
-    console.log('currentSearch: ', this.state.currentSearch.name)
+    console.log('currentSearch: ', this.state.currentSearch.name);
     fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentSearch.name)
-      .then(response => response.json()) // turn the response into json
-      .then(json => {
+      .then((response) => response.json()) // turn the response into json
+      .then((json) => {
         this.setState({
-          currentPokemon: json || {name: this.state.currentSearch.name}
-        })
+          currentPokemon: json || { name: this.state.currentSearch.name }
+        });
       });
-    event.preventDefault()
+    event.preventDefault();
   }
 
   render() {
