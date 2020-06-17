@@ -26,7 +26,7 @@ class App extends React.Component {
 
   handleChange(event) {
     this.setState({
-      currentPokemon: {
+      currentSearch: {
         name: event.target.value
       }
     })
@@ -34,24 +34,16 @@ class App extends React.Component {
 
   handleSearch(event) {
 
-    console.log('currentPokemon: ', this.state.currentPokemon.name)
-    fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentPokemon.name)
+    console.log('currentSearch: ', this.state.currentSearch.name)
+    fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentSearch.name)
       .then(response => response.json()) // turn the response into json
       .then(json => {
-        let outputString = json.name + ': '
-        let pokeType = json.types;
-        pokeType.forEach(typeItem => {
-          //push the type to the array where the key is the name of the pokemon
-          typesObj[json.name].push(typeItem.type.name)
-        });
-        //console.log pokemon name : type, type, etc..
-        outputString += typesObj[json.name].join(', ');
-        console.log(outputString);
+        this.setState({
+          currentPokemon: json || {name: this.state.currentSearch.name}
+        })
       });
 
-    // this.setState({
-    //   currentPokemon: { name: event.target.value }
-    // })
+
     event.preventDefault()
 
   }
