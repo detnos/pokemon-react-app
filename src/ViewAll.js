@@ -5,25 +5,24 @@ import PokemonListFormatter from './PokemonListFormatter';
 export default class ViewAll extends Component {
   constructor(props) {
     super(props);
-    const resultsPerPage = 50;
+    this.state = { pokemon: {} };
   }
+
   static contextType = PokemonContext;
 
-  getPokemon(this.context.state.currentSearchPage) {
-    let offset = this.context.state.currentSearchPage * resultsPerPage; //#TODO Fix upper limit of ID when offsetting.  #TODO Handle 10000 series IDs
-
-    fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentSearch.name)
-      .then((response) => response.json()) // turn the response into json
-      .then((json) => {
-        this.setState({
-          currentPokemon: json || {
-            name: this.state.currentSearch.name
-          } //#REFACTOR: Use catch instead
-        });
-      });
-  }
-
   render() {
-    return <div></div>;
+    const resultsPerPage = 4;
+    // let offset = this.context.state.currentSearchPage * resultsPerPage;
+    let idsToGet = [];
+    for (let i = 1; i < resultsPerPage; i++) {
+      idsToGet.push(i);
+    }
+    return (
+      <div>
+        {idsToGet.map((pokemonID) => {
+          return <PokemonListFormatter id={pokemonID} />;
+        })}
+      </div>
+    );
   }
 }
