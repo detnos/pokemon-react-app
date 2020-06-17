@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
 import { PokemonContext } from './PokemonContext';
-import PokemonSearch from './PokemonSearch';
 import NavBar from './NavBar';
 import Pokemon from './Pokemon'
+
 
 class App extends React.Component {
   constructor(props) {
@@ -46,15 +46,17 @@ class App extends React.Component {
   }
 
   handleSearch(event) {
-    console.log('currentSearch: ', this.state.currentSearch.name)
+    console.log('currentSearch: ', this.state.currentSearch.name);
     fetch('https://pokeapi.co/api/v2/pokemon/' + this.state.currentSearch.name)
-      .then(response => response.json()) // turn the response into json
-      .then(json => {
+      .then((response) => response.json()) // turn the response into json
+      .then((json) => {
         this.setState({
-          currentPokemon: json || {name: this.state.currentSearch.name}
-        })
+          currentPokemon: json || { name: this.state.currentSearch.name }
+        });
       });
-    event.preventDefault()
+    event.preventDefault();
+    this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
+    // this.handleClick('Search');
   }
 
   render() {
@@ -69,12 +71,12 @@ class App extends React.Component {
         >
           <header className="">
             <NavBar handleClick={this.handleClick.bind(this)} />
-            <PokemonSearch />
           </header>
           <div className="main">
             <h1> This is the main body area</h1>
             <Pokemon />
             {/* Main Body compoenents go here */}
+            <h1> This is the main body area</h1>
             {this._renderSubComp()}
           </div>
         </PokemonContext.Provider>
@@ -95,7 +97,7 @@ class MyCollection extends React.Component {
 }
 class Search extends React.Component {
   render() {
-    return <PokemonSearch />;
+    return <div>Pokemon Component with search results will go here</div>;
   }
 }
 
