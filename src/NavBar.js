@@ -1,4 +1,5 @@
 import React from 'react';
+import PokemonSearch from './PokemonSearch';
 
 function NavBar(props) {
   return (
@@ -14,7 +15,8 @@ function NavBar(props) {
       <button onClick={props.handleClick.bind(this, 'GroceryList')}>
         Grocery List
       </button>
-      <button onClick={props.handleClick.bind(this, 'Search')}>Search</button>
+      {/* <button onClick={props.handleClick.bind(this, 'Search')}>Search</button> */}
+      <PokemonSearch />
     </nav>
   );
 }
