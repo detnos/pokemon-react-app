@@ -53,10 +53,12 @@ class App extends React.Component {
         this.setState({
           currentPokemon: json || { name: this.state.currentSearch.name }
         });
-      });
+      })
+      .then((json) => { 
     event.preventDefault();
     this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
     // this.handleClick('Search');
+      })
   }
 
   render() {
