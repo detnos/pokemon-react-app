@@ -27,7 +27,7 @@ class Pokemon extends React.Component {
                 <p><strong>Type(s):</strong></p>
             <ul>
                 {currPokemon.types.map(type => {
-                    return (<li>{type.type.name}</li>)
+                    return (<li>{type.type.name}<button onclick={this.context.handleSimilarType(type.type.url)}>View Pokemon of similar type</button></li>)
                 })}
             </ul>
         </div>
