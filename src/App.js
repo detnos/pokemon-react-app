@@ -32,13 +32,11 @@ class App extends React.Component {
     fetch(url)
       .then((response) => response.json()) // turn the response into json
       .then((json) => {
-        json.pokemon.map(pokemon => {
-          //this.data.push(pokemon.pokemon.url)
-          return this.pokemonTypes = ["https://pokeapi.co/api/v2/pokemon/25/", "https://pokeapi.co/api/v2/pokemon/26/"]
-        })
-        console.log('Data: ', this.PokemonTypes)
+        let data = json.pokemon.map(pokemon => pokemon.pokemon.url)
+        console.log(data)
+        return data
       })
-      .then(() => this.setState({ view: 'similarTypes', render: 'ViewAll' }));
+      .then(data => this.setState({ pokemonTypes: data, view: 'similarTypes', render: 'ViewAll' }));
 
   }
 
