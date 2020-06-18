@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { PokemonContext } from './PokemonContext';
 import NavBar from './NavBar';
-import ViewAll from './ViewAll';
+import ViewPokemon from './ViewPokemon';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,7 +13,9 @@ class App extends React.Component {
       },
       groceryList: [{ name: '' }, { name: '' }, { name: '' }],
       render: '',
-      currentSearchPage: 0
+      currentSearchPage: 0,
+      resultsPerPage: 25,
+      view: 'all'
     };
   }
 
@@ -26,7 +28,8 @@ class App extends React.Component {
   _renderSubComp() {
     switch (this.state.render) {
       case 'ViewAll':
-        return <ViewAll />;
+        this.setState({ view: 'all' });
+        return <ViewPokemon />;
       case 'MyCollection':
         return <MyCollection />;
       case 'GroceryList':
