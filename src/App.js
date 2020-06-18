@@ -3,6 +3,8 @@ import './App.css';
 import { PokemonContext } from './PokemonContext';
 import NavBar from './NavBar';
 import ViewPokemon from './ViewPokemon';
+import Pokemon from './Pokemon';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -56,10 +58,12 @@ class App extends React.Component {
         this.setState({
           currentPokemon: json || { name: this.state.currentSearch.name } //#REFACTOR: Use catch instead
         });
-      });
+      })
+      .then(() => this.setState({ render: 'Search' }));
     event.preventDefault();
-    this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
+    // this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
     // this.handleClick('Search');
+  
   }
 
   render() {
@@ -76,6 +80,7 @@ class App extends React.Component {
             <NavBar handleClick={this.handleClick.bind(this)} />
           </header>
           <div className="main">
+            <h1> This is the main body area</h1>
             {/* Main Body compoenents go here */}
             <h1> This is the main body area</h1>
             {this._renderSubComp()}
@@ -93,7 +98,12 @@ class MyCollection extends React.Component {
 }
 class Search extends React.Component {
   render() {
-    return <div>Pokemon Component with search results will go here</div>;
+    return (
+      <div>
+        Pokemon Component with search results will go here
+        <Pokemon />
+      </div>
+    );
   }
 }
 
