@@ -23,7 +23,7 @@ class App extends React.Component {
   static contextType = PokemonContext;
 
   handleClick(compName, e) {
-    console.log(compName);
+    console.log(compName, 'was clicked');
     if (compName === 'ViewAll') {
       this.setState({ render: compName, view: 'all' });
     } else {
@@ -63,8 +63,6 @@ class App extends React.Component {
       })
       .then(() => this.setState({ render: 'Search' }));
     event.preventDefault();
-    // this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
-    // this.handleClick('Search');
   }
 
   render() {

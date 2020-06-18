@@ -31,13 +31,17 @@ export default class ViewPokemon extends Component {
     //   });
   }
 
-  componentDidMount() {
-    console.log('running componentDidMount');
-    this.runAppropriateMethod();
-  }
+  // componentDidMount() {
+  //   console.log('running componentDidMount');
+  //   this.runAppropriateMethod();
+  // }
+
+  // componentDidUpdate() {
+  //   console.log('running componentDidUpdate');
+  //   this.runAppropriateMethod();
+  // }
 
   runAppropriateMethod() {
-    console.log('running runAppropriateMethod');
     switch (this.context.state.view) {
       case 'all':
         this.viewAll();
@@ -51,7 +55,11 @@ export default class ViewPokemon extends Component {
   }
 
   render() {
-    console.log('rendering');
+    // console.log(
+    //   'rendering viewPokemon with state.view of',
+    //   this.context.state.view
+    // );
+    this.runAppropriateMethod();
     return (
       <div>
         {this.idsToGet.map((pokemonID) => {
