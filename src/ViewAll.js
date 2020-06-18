@@ -11,7 +11,7 @@ export default class ViewAll extends Component {
   static contextType = PokemonContext;
 
   render() {
-    const resultsPerPage = 4;
+    const resultsPerPage = 25;
     // let offset = this.context.state.currentSearchPage * resultsPerPage;
     let idsToGet = [];
     for (let i = 1; i < resultsPerPage; i++) {
