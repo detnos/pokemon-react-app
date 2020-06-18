@@ -6,15 +6,19 @@ export default class ViewPokemon extends Component {
   constructor(props) {
     super(props);
     // this.state = { pokemon: {} };
-    this.idsToGet = [];
+    this.data = [];
   }
 
   static contextType = PokemonContext;
 
   viewAll() {
     //builds array of pokemon ids to get
-    for (let i = 1; i < this.context.state.resultsPerPage; i++) {
-      this.idsToGet.push(i);
+    let offset =
+      this.context.state.currentPage * this.context.state.resultsPerPage + 1;
+    for (let i = offset; i < offset + this.context.state.resultsPerPage; i++) {
+      let pokeData = {};
+      pokeData.url = 'https://pokeapi.co/api/v2/pokemon/' + i;
+      this.data.push(pokeData);
     }
   }
 
@@ -42,6 +46,7 @@ export default class ViewPokemon extends Component {
   // }
 
   runAppropriateMethod() {
+    this.idsToGet = [];
     switch (this.context.state.view) {
       case 'all':
         this.viewAll();
@@ -62,8 +67,28 @@ export default class ViewPokemon extends Component {
     this.runAppropriateMethod();
     return (
       <div>
-        {this.idsToGet.map((pokemonID) => {
-          return <PokemonListFormatter id={pokemonID} />;
+        <div>
+          <button
+            onClick={() =>
+              this.setState({
+                currentPage: this.context.state.currentPage - 1
+              })
+            }
+          >
+            Previous
+          </button>
+          <button
+            onClick={() =>
+              this.setState({
+                currentPage: this.context.state.currentPage + 1
+              })
+            }
+          >
+            Next
+          </button>
+        </div>
+        {this.data.map((poke) => {
+          return <PokemonListFormatter url={poke.url} />;
         })}
       </div>
     );

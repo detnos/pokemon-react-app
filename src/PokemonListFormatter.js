@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 class PokemonListFormatter extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: '' };
+    this.state = {};
   }
 
   componentDidMount() {
-    fetch('https://pokeapi.co/api/v2/pokemon/' + this.props.id)
+    fetch(this.props.url)
       .then((response) => response.json()) // turn the response into json
       .then((json) => {
         this.setState(json);
@@ -22,7 +22,7 @@ class PokemonListFormatter extends Component {
             alt="sprite"
             src={
               'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' +
-              this.props.id +
+              this.state.id +
               '.png'
             }
           />

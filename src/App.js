@@ -14,7 +14,7 @@ class App extends React.Component {
       },
       groceryList: [{ name: '' }, { name: '' }, { name: '' }],
       render: '',
-      currentSearchPage: 0,
+      currentPage: 0,
       resultsPerPage: 25,
       view: 'all',
       type: ''
