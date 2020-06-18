@@ -24,10 +24,12 @@ class App extends React.Component {
   static contextType = PokemonContext;
 
   handleSimilarType(event) {
-    console.log('url: ', this.state.currentPokemon.types[event.target.value].type.url)
-    let url = this.state.currentPokemon.types[event.target.value].type.url
-    this.setState({ type: url, view: 'silmilarTypes', render: 'ViewAll'})
-
+    console.log(
+      'url: ',
+      this.state.currentPokemon.types[event.target.value].type.url
+    );
+    let url = this.state.currentPokemon.types[event.target.value].type.url;
+    this.setState({ type: url, view: 'similarTypes', render: 'ViewAll' });
   }
 
   handleClick(compName, e) {
