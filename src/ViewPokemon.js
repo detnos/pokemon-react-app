@@ -13,11 +13,9 @@ export default class ViewPokemon extends Component {
 
   viewAll() {
     //builds array of pokemon ids to get
-    console.log('viewAll called with per page of', this.context.state.resultsPerPage);
     for (let i = 1; i < this.context.state.resultsPerPage; i++) {
       this.idsToGet.push(i);
     }
-    console.log(this.idsToGet);
   }
 
   viewSimilarTypes() {
@@ -33,7 +31,13 @@ export default class ViewPokemon extends Component {
     //   });
   }
 
+  componentDidMount() {
+    console.log('running componentDidMount');
+    this.runAppropriateMethod();
+  }
+
   runAppropriateMethod() {
+    console.log('running runAppropriateMethod');
     switch (this.context.state.view) {
       case 'all':
         this.viewAll();
@@ -47,12 +51,7 @@ export default class ViewPokemon extends Component {
   }
 
   render() {
-    // let offset = this.context.state.currentSearchPage * resultsPerPage;
-    // let idsToGet = [];
-    // for (let i = 1; i < resultsPerPage; i++) {
-    //   idsToGet.push(i);
-    // }
-    this.runAppropriateMethod();
+    console.log('rendering');
     return (
       <div>
         {this.idsToGet.map((pokemonID) => {

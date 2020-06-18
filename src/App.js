@@ -5,7 +5,6 @@ import NavBar from './NavBar';
 import ViewPokemon from './ViewPokemon';
 import Pokemon from './Pokemon';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +16,7 @@ class App extends React.Component {
       render: '',
       currentSearchPage: 0,
       resultsPerPage: 25,
-      view: 'all'
+      view: ''
     };
   }
 
@@ -25,12 +24,15 @@ class App extends React.Component {
 
   handleClick(compName, e) {
     console.log(compName);
-    this.setState({ render: compName });
+    if (compName === 'ViewAll') {
+      this.setState({ render: compName, view: 'all' });
+    } else {
+      this.setState({ render: compName });
+    }
   }
   _renderSubComp() {
     switch (this.state.render) {
       case 'ViewAll':
-        this.setState({ view: 'all' });
         return <ViewPokemon />;
       case 'MyCollection':
         return <MyCollection />;
@@ -63,7 +65,6 @@ class App extends React.Component {
     event.preventDefault();
     // this.setState({ render: 'Search' }); //#TODO Fix this to implement this.handleClick('Search') instead
     // this.handleClick('Search');
-  
   }
 
   render() {
@@ -82,7 +83,6 @@ class App extends React.Component {
           <div className="main">
             <h1> This is the main body area</h1>
             {/* Main Body compoenents go here */}
-            <h1> This is the main body area</h1>
             {this._renderSubComp()}
           </div>
         </PokemonContext.Provider>
