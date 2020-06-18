@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 
-function PokemonListFormatter(props) {
-  const [state, setState] = useState([]);
-  useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon/' + props.id)
+class PokemonListFormatter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { name: '' };
+  }
+
+  componentDidMount() {
+    fetch('https://pokeapi.co/api/v2/pokemon/' + this.props.id)
       .then((response) => response.json()) // turn the response into json
       .then((json) => {
-        setState(json);
+        this.setState(json);
       });
-  });
+  }
 
-  return (
-    <div className="listRow">
-      <div className="pokemonSprite">
-        <img
-          alt="sprite"
-          src={
-            'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' +
-            props.id +
-            '.png'
-          }
-        />
+  render() {
+    return (
+      <div className="listRow">
+        <div className="pokemonSprite">
+          <img
+            alt="sprite"
+            src={
+              'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' +
+              this.props.id +
+              '.png'
+            }
+          />
+        </div>
+        <div className="pokemonListDetail">{this.state.name}</div>
       </div>
-      <div className="pokemonListDetail">{state.name}</div>
-    </div>
-  );
+    );
+  }
 }
 
 export default PokemonListFormatter;
