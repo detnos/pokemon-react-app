@@ -2,7 +2,9 @@ import React from 'react';
 import './App.css';
 import { PokemonContext } from './PokemonContext';
 import NavBar from './NavBar';
+import ViewPokemon from './ViewPokemon';
 import Pokemon from './Pokemon';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +14,10 @@ class App extends React.Component {
         name: ''
       },
       groceryList: [{ name: '' }, { name: '' }, { name: '' }],
-      render: ''
+      render: '',
+      currentSearchPage: 0,
+      resultsPerPage: 25,
+      view: 'all'
     };
   }
 
@@ -25,7 +30,8 @@ class App extends React.Component {
   _renderSubComp() {
     switch (this.state.render) {
       case 'ViewAll':
-        return <ViewAll />;
+        this.setState({ view: 'all' });
+        return <ViewPokemon />;
       case 'MyCollection':
         return <MyCollection />;
       case 'GroceryList':
@@ -50,7 +56,7 @@ class App extends React.Component {
       .then((response) => response.json()) // turn the response into json
       .then((json) => {
         this.setState({
-          currentPokemon: json || { name: this.state.currentSearch.name }
+          currentPokemon: json || { name: this.state.currentSearch.name } //#REFACTOR: Use catch instead
         });
       })
       .then(() => this.setState({ render: 'Search' }));
@@ -85,11 +91,6 @@ class App extends React.Component {
   }
 }
 
-class ViewAll extends React.Component {
-  render() {
-    return <div>ViewALL Component Would be displayed here</div>;
-  }
-}
 class MyCollection extends React.Component {
   render() {
     return <div>MyCollection Component Would be displayed here</div>;
