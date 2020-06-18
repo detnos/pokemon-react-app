@@ -16,15 +16,15 @@ export default class ViewPokemon extends Component {
     let offset =
       this.context.state.currentPage * this.context.state.resultsPerPage + 1;
     for (let i = offset; i < offset + this.context.state.resultsPerPage; i++) {
-      let pokeData = {};
-      pokeData.url = 'https://pokeapi.co/api/v2/pokemon/' + i;
+      let pokeData = '';
+      pokeData = 'https://pokeapi.co/api/v2/pokemon/' + i;
       this.data.push(pokeData);
     }
+    this.setState({pokemonTypes: this.data})
   }
 
   viewSimilarTypes() {
-    //builds array of pokemon names based on type
-    // fetch to get all pokemon of set type
+    
   }
 
   fetchData() {
@@ -37,7 +37,8 @@ export default class ViewPokemon extends Component {
 
   // componentDidMount() {
   //   console.log('running componentDidMount');
-  //   this.runAppropriateMethod();
+  //   this.viewSimilarTypes();
+
   // }
 
   // componentDidUpdate() {
@@ -45,26 +46,28 @@ export default class ViewPokemon extends Component {
   //   this.runAppropriateMethod();
   // }
 
-  runAppropriateMethod() {
-    this.idsToGet = [];
-    switch (this.context.state.view) {
-      case 'all':
-        this.viewAll();
-        break;
-      case 'similarTypes':
-        this.viewSimilarTypes();
-        break;
-      default:
-        this.viewAll();
-    }
-  }
+  // runAppropriateMethod() {
+  //   //this.Data = [];
+  //   switch (this.context.state.view) {
+  //     case 'all':
+  //       this.viewAll();
+  //       break;
+  //     case 'similarTypes':
+  //       this.viewSimilarTypes();
+  //       break;
+  //     default:
+  //       this.viewAll();
+  //   }
+  // }
 
   render() {
     // console.log(
     //   'rendering viewPokemon with state.view of',
     //   this.context.state.view
     // );
-    this.runAppropriateMethod();
+    if (this.context.state.view === 'all') {
+      this.viewAll();
+    }
     return (
       <div>
         <div>
@@ -87,8 +90,8 @@ export default class ViewPokemon extends Component {
             Next
           </button>
         </div>
-        {this.data.map((poke) => {
-          return <PokemonListFormatter url={poke.url} />;
+        {this.context.state.pokemonTypes.map((poke) => {
+          return <PokemonListFormatter url={poke} />;
         })}
       </div>
     );

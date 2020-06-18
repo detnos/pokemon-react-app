@@ -17,7 +17,7 @@ class App extends React.Component {
       currentPage: 0,
       resultsPerPage: 25,
       view: 'all',
-      type: ''
+      pokemonTypes: []
     };
   }
 
@@ -29,7 +29,17 @@ class App extends React.Component {
       this.state.currentPokemon.types[event.target.value].type.url
     );
     let url = this.state.currentPokemon.types[event.target.value].type.url;
-    this.setState({ type: url, view: 'similarTypes', render: 'ViewAll' });
+    fetch(url)
+      .then((response) => response.json()) // turn the response into json
+      .then((json) => {
+        json.pokemon.map(pokemon => {
+          //this.data.push(pokemon.pokemon.url)
+          return this.pokemonTypes = ["https://pokeapi.co/api/v2/pokemon/25/", "https://pokeapi.co/api/v2/pokemon/26/"]
+        })
+        console.log('Data: ', this.PokemonTypes)
+      })
+      .then(() => this.setState({ view: 'similarTypes', render: 'ViewAll' }));
+
   }
 
   handleClick(compName, e) {
