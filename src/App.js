@@ -17,11 +17,19 @@ class App extends React.Component {
       render: '',
       currentSearchPage: 0,
       resultsPerPage: 25,
-      view: 'all'
+      view: 'all',
+      type: ''
     };
   }
 
   static contextType = PokemonContext;
+
+  handleSimilarType(event) {
+    console.log('url: ', this.state.currentPokemon.types[event.target.value].type.url)
+    let url = this.state.currentPokemon.types[event.target.value].type.url
+    this.setState({ type: url, view: 'silmilarTypes', render: 'ViewAll'})
+
+  }
 
   handleClick(compName, e) {
     console.log(compName);
@@ -30,7 +38,6 @@ class App extends React.Component {
   _renderSubComp() {
     switch (this.state.render) {
       case 'ViewAll':
-        this.setState({ view: 'all' });
         return <ViewPokemon />;
       case 'MyCollection':
         return <MyCollection />;
@@ -73,7 +80,8 @@ class App extends React.Component {
           value={{
             state: this.state,
             handleChange: this.handleChange.bind(this),
-            handleSearch: this.handleSearch.bind(this)
+            handleSearch: this.handleSearch.bind(this),
+            handleSimilarType: this.handleSimilarType.bind(this)
           }}
         >
           <header className="">
